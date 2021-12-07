@@ -1,60 +1,66 @@
+//Express imports
 const port = process.env.PORT || 3000;
 const express = require("express");
 const app = express();
+const fetch = (...args) => import('node-fetch').then(({default: fetch}) => fetch(...args));
+
+//cors and middleware
 var cors = require("cors");
 var bodyparser = require("body-parser");
-const { json } = require("body-parser");
 app.use(cors());
 app.use(bodyparser.urlencoded({ extended: true }));
 app.use(bodyparser.json());
-var tf = require('@tensorflow/tfjs');
-const fetch = (...args) => import('node-fetch').then(({default: fetch}) => fetch(...args));
 
+//Tensorflow js
+var tf = require('@tensorflow/tfjs');
+
+//Accept POST requests at the localhost:3000/ endpoint
 app.post("/", (req, res) => {
+
+    //Store all of the comments received from the extension.
     var arr = req.body.commentArray;
+
+
     var scoreSum = 0;
     var iterationCount = 0;
     setupSentimentModel().then(()=> {
         for(var i=0; i<arr.length; i++){
             iterationCount = iterationCount + 1;
             currentScore = getSentimentScore(arr[i].text);
-            //Get the sentiment score
+
+            //Get the sentiment score for each comment and add it to a running total
             if (arr[i].hasOwnProperty("likes") && arr[i].likes.hasOwnProperty("simpleText")) {
-              //Weigh the sentiment score according to the number of likes
               likeCount = verifyNumber(arr[i].likes.simpleText);
 
-              //Weigh the current comment according to it's like count
+              //Scale up the running total and iteration count according to the number of likes.
               var weighedScore = 0;
               for(var j=0; j<Number(likeCount); j++){
                 weighedScore = weighedScore + currentScore;
                 iterationCount = iterationCount + 1;
               }
-
               scoreSum += weighedScore;
           } else {
+            //If comment didn't have any likes, just add the sentiment score and then increase the iteration count.
             scoreSum += currentScore;
             iterationCount = iterationCount + 1;
           }
         }
 
-        console.log("Summed: ", scoreSum, iterationCount, scoreSum/iterationCount);
+        //Log and return the overall sentiment score.
+        console.log("Score: ", scoreSum/iterationCount);
         res.json(`{"score": ${scoreSum/iterationCount}}`);
     })
-/*
-
-
-*/
-    
 });
 
+//Make the server start listening on port 3000.
 app.listen(port, () => {
     console.log(`Listening on ${port}`);
 });
 
 
-//HELPER FUNCTIONS
-
+//*******************HELPER FUNCTIONS*******************//
 function verifyNumber (val) {
+  //Convert numbers that are abbreviated as like 1.2k into 1200
   multiplier = val.substr(-1).toUpperCase();
   if (multiplier == "K"){
     return parseFloat(val) * 1000;
@@ -66,8 +72,7 @@ function verifyNumber (val) {
 }
 
 
-//SENTIMENT SECTION
-
+//****************SENTIMENT FUNCTIONS****************//
 const PAD_INDEX = 0;
 const OOV_INDEX = 2;
 

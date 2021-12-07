@@ -9,6 +9,10 @@
 
 ## Enable CORS (for development)
 1. Install [this chrome extension](https://chrome.google.com/webstore/detail/allow-cors-access-control/lhobafahddgcelffkeicbaginigeejlf?hl=en)
+2. Make sure it's enabled like in the below pic:
+
+
+![image](https://user-images.githubusercontent.com/60011793/145067225-124b8f96-c0e7-4acd-aaa4-724764bf4f1f.png)
 
 ## Start the server
 1. Open terminal or cmd.

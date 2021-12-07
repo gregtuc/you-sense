@@ -13,5 +13,5 @@
 ## Start the server
 1. Open terminal or cmd.
 2. Navigate to the server folder with `cd server`
-3. Install the dependencies with `npm install` (you need Node.js installed)
+3. Install the dependencies with `npm install` _(you need Node.js installed)_
 4. Start the server with `node index.js`

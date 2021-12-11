@@ -1,6 +1,6 @@
 # yt-sentify
 
-_instant AI-powered sentiment scores for the comment section_
+_instant AI-powered sentiment scores for the Youtube comment section_
 
 ## What is this?
 * This is an early-stage chrome extension to detect sentiment from the Youtube comment section.

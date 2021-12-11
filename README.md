@@ -1,4 +1,4 @@
-# yt-sentify
+# you-sense
 
 _instant AI-powered sentiment scores for the Youtube comment section_
 

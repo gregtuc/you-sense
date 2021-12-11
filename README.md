@@ -8,7 +8,7 @@ _instant 🤖 powered sentiment scores for the Youtube comment section_
 
 ![Capture](https://user-images.githubusercontent.com/60011793/145688404-e02d02a5-675b-48bf-b024-3b1937d8fbc2.PNG)
 
-## Install the Extension:
+## Install the Extension 💻:
 1. Go-to `chrome://extensions` (or `brave://extensions` if using Brave)
 2. Enable developer mode (slider on top right)
 3. Download this repository folder as a Zip File.

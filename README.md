@@ -7,7 +7,7 @@
 ![Capture](https://user-images.githubusercontent.com/60011793/145688404-e02d02a5-675b-48bf-b024-3b1937d8fbc2.PNG)
 
 ## How does it work?
-* This extension uses [TensorFlow.js](https://github.com/tensorflow/tfjs-examples/tree/master/sentiment) to run comments through a pre-trained convolutional neural net [CNN](https://en.wikipedia.org/wiki/Convolutional_neural_network) to detect sentiment scores - all inside of your own browser!
+* This extension uses [TensorFlow.js](https://github.com/tensorflow/tfjs-examples/tree/master/sentiment) to run comments through a pre-trained convolutional neural net [(CNN)](https://en.wikipedia.org/wiki/Convolutional_neural_network) to detect sentiment scores - all inside of your own browser!
 * [Browserify](https://github.com/browserify/browserify) is used to make key node modules available.
 * Comments are retrieved from the public Youtube API -the same one your browser uses when loading the comments manually. Currently, 5 pages of comments (~40 comments) are fetched to avoid excessive requests.
 

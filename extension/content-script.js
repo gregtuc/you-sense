@@ -87,7 +87,7 @@ function fetchAndInject(...arguments) {
                 }
 
                 //Recurse using the continuation token if it exists && if max calls haven't exceeded 5 (to prevent youtube throttling our connection)
-                if (!floodControl2 && floodControl3 < 3) {
+                if (!floodControl2 && floodControl3 < 5) {
                     fetchAndInject(String(continuationToken));
                 } else {
                     //Get Sentiment
@@ -183,22 +183,15 @@ function fetchAndInject(...arguments) {
  * @param {*} commentArray 
  */
 function getSentiment(commentArray) {
-    var xhttp = new XMLHttpRequest();
-    var res;
-    xhttp.onreadystatechange = function () {
-        if (this.readyState == 4 && this.status == 200) {
-            res = JSON.parse(this.responseText);
-            var number = Number(JSON.parse(res).score * 100)
-            var newElement = document.createElement('yt-formatted-string');
-            newElement.className = "style-scope ytd-video-primary-info-renderer";
-            newElement.innerText = "tester";
-            newElement.id = "sentiment-score";
-            document.querySelector("#info-strings").appendChild(newElement);
-            document.querySelector("#sentiment-score").innerText= `Comment score = ${number.toFixed(1)}/100`;
-        }
-    }
-    var data = JSON.stringify({ commentArray });
-    xhttp.open("POST", "http://localhost:3000/", true);
-    xhttp.setRequestHeader("Content-type", "application/json");
-    xhttp.send(data);
+    console.log(commentArray);
+    sentiment.getSentiment(commentArray).then(res => {
+        console.log('THE RESPONSE: \n', res);
+        var number = Number(JSON.parse(res).score * 100)
+        var newElement = document.createElement('yt-formatted-string');
+        newElement.className = "style-scope ytd-video-primary-info-renderer";
+        newElement.innerText = "tester";
+        newElement.id = "sentiment-score";
+        document.querySelector("#info-strings").appendChild(newElement);
+        document.querySelector("#sentiment-score").innerText= `Comment score = ${number.toFixed(1)}/100`;
+    })
 }

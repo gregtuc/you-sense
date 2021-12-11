@@ -1,19 +1,14 @@
 {
-  "name": "extension",
+  "name": "yt-sentify",
   "version": "1.0",
-  "description": "open-source extension to keep track of dislikes on youtube videos",
+  "description": "open-source extension to keep track of comment sentiment on youtube videos",
   "permissions": [
-    "http://localhost/*",
-    "activeTab",
-    "webNavigation",
-    "http://localhost:3000",
-    "http://localhost:3000/",
-    "<all_urls>"
+    "activeTab"
   ],
   "content_scripts": [
     {
       "matches": ["http://www.youtube.com/*", "https://www.youtube.com/*"],
-      "js": ["content-script.js"]
+      "js": ["/sentiment/bundle.js", "content-script.js"]
     }
   ],
   "manifest_version": 2

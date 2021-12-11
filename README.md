@@ -22,5 +22,5 @@
 1. Go-to `chrome://extensions` (or `brave://extensions` if using Brave)
 2. Enable developer mode (slider on top right)
 3. Download this repository folder as a Zip File.
-4. Unzip the file and click and drag _only_ the `extension` folder onto the extensions page.
+4. Unzip the file and click and drag _only_ the `yt-sentify` folder onto the extensions page.
 5. Make sure the extension is turned on.

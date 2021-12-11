@@ -9,7 +9,7 @@
 ## How does it work?
 * This extension uses [TensorFlow.js](https://github.com/tensorflow/tfjs-examples/tree/master/sentiment) to run comments through a pre-trained convolutional neural net [CNN](https://en.wikipedia.org/wiki/Convolutional_neural_network) to detect sentiment scores - all inside of your own browser!
 * [Browserify](https://github.com/browserify/browserify) is used to make key node modules available.
-* Comments are retrieved from the public Youtube API (the same one your browser uses when loading the comments manually. Currently, 5 pages of comments (~40 comments) are fetched to avoid excessive requests.
+* Comments are retrieved from the public Youtube API -the same one your browser uses when loading the comments manually. Currently, 5 pages of comments (~40 comments) are fetched to avoid excessive requests.
 
 ## Can this replace the removal of dislikes?
 * This extension detects sentiment, not number of dislikes. If the video is sad, sad sentiment may be reflected as negative sentiment. Similarily, it may have trouble understanding comments sections that are particularily ironic and/or sarcastic. This extension performs consistenly in consistent comments sections.

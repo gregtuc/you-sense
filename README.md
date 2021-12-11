@@ -1,4 +1,4 @@
-<h1 align="center">yt-sentify</h1>
+<h1 align="center">Youtube comment sentiment analyzer</h1>
 
 ## What is this?
 * This is an early-stage chrome extension to detect sentiment from the Youtube comment section.

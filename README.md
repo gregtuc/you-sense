@@ -1,4 +1,6 @@
-<h1 align="center">Youtube comment sentiment analyzer</h1>
+# yt-sentify
+
+_instant AI-powered sentiment scores for the comment section_
 
 ## What is this?
 * This is an early-stage chrome extension to detect sentiment from the Youtube comment section.

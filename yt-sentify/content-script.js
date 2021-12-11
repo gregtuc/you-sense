@@ -5,10 +5,10 @@ var floodControl3 = 0; //Manages max number of call iterations
 
 document.addEventListener("yt-navigate-finish", function (event) {
     //Reset globals after navigating away from a video.
-    commentsArray = [];
-    floodControl1 = false;
-    floodControl2 = false;
-    floodControl3 = 0;
+    commentsArray = []; 
+    floodControl1 = false; //Prevent re-entering the initial next call (first call doesn't contain comments, only the pagination token)
+    floodControl2 = false; //Prevent continuing recursive calls if we've reached the end of the comment.
+    floodControl3 = 0; //Prevent overloading youtube with too many requests (max 5 per video)
     //Reinject the script.
     fetchAndInject();
 });
@@ -30,7 +30,7 @@ function fetchAndInject(...arguments) {
             var comments;
             res = JSON.parse(this.responseText);
 
-            if ((argsArray.length == 0) && (floodControl1 == false)) {
+            if ((argsArray.length == 0) || (floodControl1 == false)) {
                 //Activate Flood Control (this condition cannot be re-entered)
                 floodControl1 = true;
 
@@ -49,11 +49,18 @@ function fetchAndInject(...arguments) {
 
                 //Recurse using the continuation token
                 fetchAndInject(String((continuationToken)));
-            } else {
-                //Get continuation token
-                continuationToken = res.onResponseReceivedEndpoints[0].reloadContinuationItemsCommand.continuationItems[0].commentsHeaderRenderer.sortMenu.sortFilterSubMenuRenderer.subMenuItems[1].serviceEndpoint.continuationCommand.token;
+            } else {    
 
-                //Verify that we haven't reached the end of the comment section
+                //If this token is undefined, comments are disabled.
+                try{                
+                    //Get continuation token
+                    continuationToken = res.onResponseReceivedEndpoints[0].reloadContinuationItemsCommand.continuationItems[0].commentsHeaderRenderer.sortMenu.sortFilterSubMenuRenderer.subMenuItems[1].serviceEndpoint.continuationCommand.token;
+                } catch(e){
+                    commentsDisabled();
+                    return;
+                }
+
+                //Activate second flood control if we've reached the end of the comments.
                 if (continuationToken == undefined || continuationToken == null || continuationToken.length <= 1) {
                     floodControl2 = true;
                 }
@@ -184,12 +191,29 @@ function fetchAndInject(...arguments) {
  */
 function getSentiment(commentArray) {
     sentiment.getSentiment(commentArray).then(res => {
-        var number = Number(JSON.parse(res).score * 100)
+        var number = Number(JSON.parse(res).score * 100);
+        if(!document.querySelector('#sentiment-score')) {
+            var newElement = document.createElement('yt-formatted-string');
+            newElement.className = "style-scope ytd-video-primary-info-renderer";
+            newElement.innerText = "tester";
+            newElement.id = "sentiment-score";
+            document.querySelector("#info-strings").appendChild(newElement);
+            document.querySelector("#sentiment-score").innerText= `Comment score = ${number.toFixed(1)}/100`;
+        } else {
+            document.querySelector("#sentiment-score").innerText= `Comment score = ${number.toFixed(1)}/100`;
+        }
+    })
+}
+
+function commentsDisabled(){
+    if(!document.querySelector('#sentiment-score')) {
         var newElement = document.createElement('yt-formatted-string');
         newElement.className = "style-scope ytd-video-primary-info-renderer";
         newElement.innerText = "tester";
         newElement.id = "sentiment-score";
         document.querySelector("#info-strings").appendChild(newElement);
-        document.querySelector("#sentiment-score").innerText= `Comment score = ${number.toFixed(1)}/100`;
-    })
+        document.querySelector("#sentiment-score").innerText= `Comment score = 0`;
+    } else {
+        document.querySelector("#sentiment-score").innerText= `Comment score = 0`;
+    }
 }

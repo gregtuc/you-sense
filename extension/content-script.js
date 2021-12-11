@@ -14,7 +14,7 @@ document.addEventListener("yt-navigate-finish", function (event) {
 });
 
 /*
-Method to fetch the comments from the public Youtube API recursively. Maximum of 6 recursive calls at a time to prevent throttling.
+Method to fetch the comments from the public Youtube API recursively. Maximum of 5 recursive calls at a time to prevent throttling.
 The result of this function (commentArray) is passed to the getSentiment method.
 */
 function fetchAndInject(...arguments) {
@@ -30,12 +30,11 @@ function fetchAndInject(...arguments) {
             var comments;
             res = JSON.parse(this.responseText);
 
-            if ((argsArray.length < 1) && (floodControl1 == false)) {
+            if ((argsArray.length == 0) && (floodControl1 == false)) {
                 //Activate Flood Control (this condition cannot be re-entered)
                 floodControl1 = true;
 
                 //Get continuation token
-
                 var prefix = res.contents.twoColumnWatchNextResults.results.results.contents;
                 for(var i=0; i<prefix.length; i++){
                     try{
@@ -88,8 +87,7 @@ function fetchAndInject(...arguments) {
                 }
 
                 //Recurse using the continuation token if it exists && if max calls haven't exceeded 5 (to prevent youtube throttling our connection)
-                if (!floodControl2 && floodControl3 < 5) {
-
+                if (!floodControl2 && floodControl3 < 3) {
                     fetchAndInject(String(continuationToken));
                 } else {
                     //Get Sentiment
@@ -196,7 +194,7 @@ function getSentiment(commentArray) {
             newElement.innerText = "tester";
             newElement.id = "sentiment-score";
             document.querySelector("#info-strings").appendChild(newElement);
-            document.querySelector("#sentiment-score").innerText= `Sentiment Score = ${number.toFixed(1)}/100`;
+            document.querySelector("#sentiment-score").innerText= `Comment score = ${number.toFixed(1)}/100`;
         }
     }
     var data = JSON.stringify({ commentArray });

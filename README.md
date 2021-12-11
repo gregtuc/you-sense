@@ -19,7 +19,7 @@ _Remember: The comment section is an incredibly polarizing place where those wit
 
 ## How it works 
 * This extension uses [TensorFlow.js](https://github.com/tensorflow/tfjs-examples/tree/master/sentiment) to run comments through a pre-trained convolutional neural net [(CNN)](https://en.wikipedia.org/wiki/Convolutional_neural_network) to detect sentiment scores - all inside of your own browser!
-* Training was performed on a set of 25,000 IMDB movie reviews, but this approach may evolve moving forward 🎬 🍿
+* The pretrained model uses a dataset of 25,000 IMDB movie reviews, but this approach may evolve moving forward 🎬 🍿
 * [Browserify](https://github.com/browserify/browserify) is used to make key node modules available
 * Comments are retrieved from the public Youtube API -the same one your browser uses when loading the comments manually. Currently, 5 pages of comments (~40 comments) are fetched to avoid excessive requests
 

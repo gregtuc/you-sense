@@ -15,7 +15,7 @@ _instant 🤖 powered sentiment scores for the Youtube comment section_
 4. Unzip the file and click and drag the `you-sense-main` folder onto the extensions page
 5. Make sure the extension is turned on
 
-_Remember: The comment section is an incredibly polarizing place where those with hardline views tend to speak up. Anything above a score of 50 is considered positive, and anything below 50 is negative. Score is simply provided for additional detail._
+_Remember: The comment section is an incredibly polarizing place where those with hardline views tend to speak up. Anything above a score of 50 is considered positive, and anything below 50 is negative. Score/100 is simply provided to give you additional detail._
 
 ## How it works 
 * This extension uses [TensorFlow.js](https://github.com/tensorflow/tfjs-examples/tree/master/sentiment) to run comments through a pre-trained convolutional neural net [(CNN)](https://en.wikipedia.org/wiki/Convolutional_neural_network) to detect sentiment scores - all inside of your own browser!

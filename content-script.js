@@ -186,7 +186,7 @@ function fetchAndInject(...arguments) {
 }
 
 /**
- * Method to get sentiment from the server.
+ * Method to get sentiment and inject the score onto the page
  * @param {*} commentArray 
  */
 function getSentiment(commentArray) {

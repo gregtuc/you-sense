@@ -131,7 +131,6 @@ async function setupSentimentModel(){
     }
     if(typeof metadata === 'undefined'){
         metadata = await loadMetadata(urls.metadata);
-        console.log(metadata);
     }
 }
 

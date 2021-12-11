@@ -183,9 +183,7 @@ function fetchAndInject(...arguments) {
  * @param {*} commentArray 
  */
 function getSentiment(commentArray) {
-    console.log(commentArray);
     sentiment.getSentiment(commentArray).then(res => {
-        console.log('THE RESPONSE: \n', res);
         var number = Number(JSON.parse(res).score * 100)
         var newElement = document.createElement('yt-formatted-string');
         newElement.className = "style-scope ytd-video-primary-info-renderer";

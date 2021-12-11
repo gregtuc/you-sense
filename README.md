@@ -14,10 +14,13 @@
 ## Can this replace the removal of dislikes?
 * This extension detects sentiment, not number of dislikes. If the video is sad, sad sentiment may be reflected as negative sentiment. Similarily, it may have trouble understanding comments sections that are particularily ironic and/or sarcastic. This extension performs consistenly in consistent comments sections.
 
+## It's not showing anything
+* Try refreshing the video page. 
+* Make an issue and send a screenshot/paste of any error logs! 
+
 ## Install the Extension:
 1. Go-to `chrome://extensions` (or `brave://extensions` if using Brave)
 2. Enable developer mode (slider on top right)
 3. Download this repository folder as a Zip File.
 4. Unzip the file and click and drag _only_ the `extension` folder onto the extensions page.
 5. Make sure the extension is turned on.
-

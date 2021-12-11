@@ -197,6 +197,11 @@ function getSentiment(commentArray) {
             newElement.className = "style-scope ytd-video-primary-info-renderer";
             newElement.innerText = "tester";
             newElement.id = "sentiment-score";
+            if(number>50){
+                newElement.style="font-weight:bold;color:green;font-size:120%;"
+            } else {
+                newElement.style="font-weight:bold;color:red;font-size:120%;"
+            }
             document.querySelector("#info-strings").appendChild(newElement);
             document.querySelector("#sentiment-score").innerText= `Comment score = ${number.toFixed(1)}/100`;
         } else {
@@ -211,6 +216,7 @@ function commentsDisabled(){
         newElement.className = "style-scope ytd-video-primary-info-renderer";
         newElement.innerText = "tester";
         newElement.id = "sentiment-score";
+        newElement.style="font-weight:bold;color:yellow;font-size:120%;"
         document.querySelector("#info-strings").appendChild(newElement);
         document.querySelector("#sentiment-score").innerText= `Comment score = 0`;
     } else {

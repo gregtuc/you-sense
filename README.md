@@ -2,8 +2,8 @@
 
 _instant 🤖 powered sentiment scores for the Youtube comment section_
 
-## What is this?
-* This is an early-stage chrome extension to detect sentiment from the Youtube comment section.
+## you-what 🧐?
+* This is an early-stage chrome extension that uses a neural network to detect sentiment from the Youtube comment section.
 * Comment sentiment score is inserted below the video title, as illustrated below:
 
 ![Capture](https://user-images.githubusercontent.com/60011793/145688404-e02d02a5-675b-48bf-b024-3b1937d8fbc2.PNG)

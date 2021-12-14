@@ -1,15 +1,13 @@
 {
-  "name": "yt-sentify",
-  "version": "1.0",
-  "description": "open-source extension to keep track of comment sentiment on youtube videos",
-  "permissions": [
-    "activeTab"
-  ],
-  "content_scripts": [
-    {
-      "matches": ["http://www.youtube.com/*", "https://www.youtube.com/*"],
-      "js": ["/sentiment/bundle.js", "content-script.js"]
-    }
-  ],
-  "manifest_version": 2
+	"name": "you-sense",
+	"version": "1.0",
+	"description": "open-source extension to keep track of comment sentiment on youtube videos",
+	"permissions": ["activeTab"],
+	"content_scripts": [
+		{
+			"matches": ["http://www.youtube.com/*", "https://www.youtube.com/*"],
+			"js": ["/sentiment/bundle.js", "content-script.js"]
+		}
+	],
+	"manifest_version": 2
 }

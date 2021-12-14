@@ -116,12 +116,13 @@ function evaluateScore(text) {
 	const inputText = text
 		.trim()
 		.toLowerCase()
-		.replace(/(\.|\,|\!)/g, "")
+		.replace(/(\.|\,|\!|\?)/g, "")
 		.split(" ");
+
 	const sequence = inputText.map((word) => {
 		try {
 			let wordIndex = metadata.word_index[word] + metadata.index_from;
-			if (wordIndex > metadata.vocabulary_size) {
+			if (wordIndex > metadata.vocabulary_size || isNaN(wordIndex)) {
 				wordIndex = OOV_INDEX;
 			}
 			return wordIndex;

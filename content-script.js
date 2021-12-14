@@ -197,16 +197,16 @@ function getSentiment(commentArray) {
             newElement.className = "style-scope ytd-video-primary-info-renderer";
             newElement.innerText = "tester";
             newElement.id = "sentiment-score";
-            if(number>50){
-                newElement.style="font-weight:bold;color:green;font-size:120%;"
+            if(number>=50){
+                newElement.style="font-weight:bold;color:green;font-size:100%;"
             } else {
-                newElement.style="font-weight:bold;color:red;font-size:120%;"
+                newElement.style="font-weight:bold;color:red;font-size:100%;"
             }
             document.querySelector("#info-strings").appendChild(newElement);
-            document.querySelector("#sentiment-score").innerText= `Comment score = ${number.toFixed(1)}/100`;
+            document.querySelector("#sentiment-score").innerText= `${number.toFixed(1)}/100`;
         } else {
-            document.querySelector("#sentiment-score").innerText= `Comment score = ${number.toFixed(1)}/100`;
-            if(number>50){
+            document.querySelector("#sentiment-score").innerText= `${number.toFixed(1)}/100`;
+            if(number>=50){
                 document.querySelector("#sentiment-score").style="font-weight:bold;color:green;font-size:120%;"
             } else {
                 document.querySelector("#sentiment-score").style="font-weight:bold;color:red;font-size:120%;"
@@ -221,11 +221,11 @@ function commentsDisabled(){
         newElement.className = "style-scope ytd-video-primary-info-renderer";
         newElement.innerText = "tester";
         newElement.id = "sentiment-score";
-        newElement.style="font-weight:bold;color:yellow;font-size:120%;"
+        newElement.style="color:yellow;font-size:100%;"
         document.querySelector("#info-strings").appendChild(newElement);
-        document.querySelector("#sentiment-score").innerText= `Comment score = 0`;
+        document.querySelector("#sentiment-score").innerText= `Comments disabled`;
     } else {
-        document.querySelector("#sentiment-score").innerText= `Comment score = 0`;
+        document.querySelector("#sentiment-score").innerText= `Comments disabled`;
         document.querySelector("#sentiment-score").style="font-weight:bold;color:yellow;font-size:120%;"
     }
 }

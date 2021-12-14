@@ -12,9 +12,6 @@ const axios = require("axios");
 async function getSentiment(arr) {
 	return new Promise((resolve, reject) => {
 		//Store all of the comments received from the extension.
-		var scoreSum = 0;
-		var iterationCount = 0;
-
 		var weightedScore = 0;
 		var weightSum = 0;
 		setupSentimentModel().then(() => {
@@ -38,9 +35,6 @@ async function getSentiment(arr) {
 					weightedScore += currentScore * 1;
 					weightSum += 1;
 				}
-
-				scoreSum += currentScore;
-				iterationCount = iterationCount + 1;
 			}
 
 			resolve(`{"score": ${weightedScore / weightSum}}`);

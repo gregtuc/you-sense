@@ -39,17 +39,9 @@ async function getSentiment(arr) {
 					weightSum += 1;
 				}
 
-				console.log(
-					`Iteration: ${i}\nText: ${arr[i].text}\nScore: ${currentScore}\n`
-				);
-				if (arr[i].likes && arr[i].likes.simpleText) {
-					console.log(`Likes: ${arr[i].likes.simpleText}`);
-				}
-
 				scoreSum += currentScore;
 				iterationCount = iterationCount + 1;
 			}
-			console.log("Old Score: ", scoreSum / iterationCount);
 
 			resolve(`{"score": ${weightedScore / weightSum}}`);
 		});

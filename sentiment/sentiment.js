@@ -18,13 +18,16 @@ async function getSentiment(arr) {
 			for (var i = 0; i < arr.length; i++) {
 				//TODO: Evaluate benefits of assigning weight to sentiment scores based on # of likes and/or # of reply's (controversialness ?)
 				currentScore = evaluateScore(arr[i].text);
+				if (currentScore == -1) {
+					continue;
+				}
 
 				//Weighted score evaluation
 				if (arr[i].likes && arr[i].likes.simpleText) {
 					var likeCount = Number(formatNumber(arr[i].likes.simpleText));
 
 					//Trying to eliminate the large amount of false negatives by eliminating weight below a threshold of 0.1.
-					if (currentScore < 0.1) {
+					if (currentScore < 0.001) {
 						weightedScore += currentScore;
 						weightSum += 1;
 					} else {
@@ -48,7 +51,6 @@ async function getSentiment(arr) {
 function formatNumber(val) {
 	//Return numbers not containing letters in question
 	if (String(val).indexOf("K") == -1 && String(val).indexOf("M") == -1) {
-		console.log("here ", val);
 		return val;
 	}
 
@@ -116,8 +118,13 @@ function evaluateScore(text) {
 	const inputText = text
 		.trim()
 		.toLowerCase()
-		.replace(/(\.|\,|\!|\?)/g, "")
-		.split(" ");
+		.replace(/(\.|\,|\!|\?|\*|\~|\"|\(|\-|\+|\=|\<|\>)/g, "")
+		.replace(
+			/([\u2700-\u27BF]|[\uE000-\uF8FF]|\uD83C[\uDC00-\uDFFF]|\uD83D[\uDC00-\uDFFF]|[\u2011-\u26FF]|\uD83E[\uDD10-\uDDFF])/g,
+			""
+		)
+		.split(" ")
+		.filter((e) => e);
 
 	const sequence = inputText.map((word) => {
 		try {
@@ -130,13 +137,16 @@ function evaluateScore(text) {
 			return null;
 		}
 	});
+
+	//If only one word was inputted and it's not in the dictionary, return -1.
+	if (inputText.length == 1 && sequence[0] == 2) {
+		return -1;
+	}
 	const paddedSequence = padSequences([sequence], metadata.max_len);
 	const input = tf.tensor2d(paddedSequence, [1, metadata.max_len]);
-
 	const predictOut = model.predict(input);
 	const score = predictOut.dataSync()[0];
 	predictOut.dispose();
-
 	return score;
 }
 

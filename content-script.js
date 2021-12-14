@@ -226,6 +226,6 @@ function commentsDisabled(){
         document.querySelector("#sentiment-score").innerText= `Comments disabled`;
     } else {
         document.querySelector("#sentiment-score").innerText= `Comments disabled`;
-        document.querySelector("#sentiment-score").style="font-weight:bold;color:yellow;font-size:120%;"
+        document.querySelector("#sentiment-score").style="font-weight:bold;color:yellow;font-size:100%;"
     }
 }

@@ -207,9 +207,9 @@ function getSentiment(commentArray) {
         } else {
             document.querySelector("#sentiment-score").innerText= `${number.toFixed(1)}/100`;
             if(number>=50){
-                document.querySelector("#sentiment-score").style="font-weight:bold;color:green;font-size:120%;"
+                document.querySelector("#sentiment-score").style="font-weight:bold;color:green;font-size:100%;"
             } else {
-                document.querySelector("#sentiment-score").style="font-weight:bold;color:red;font-size:120%;"
+                document.querySelector("#sentiment-score").style="font-weight:bold;color:red;font-size:100%;"
             }
         }
     })

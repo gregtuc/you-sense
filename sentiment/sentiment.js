@@ -27,7 +27,7 @@ async function getSentiment(arr) {
 					var likeCount = Number(formatNumber(arr[i].likes.simpleText));
 
 					//Trying to eliminate the large amount of false negatives by eliminating weight below a threshold of 0.1.
-					if (currentScore < 0.001) {
+					if (currentScore < 0.1) {
 						weightedScore += currentScore;
 						weightSum += 1;
 					} else {
